@@ -10,13 +10,6 @@
 
 const { configure } = require("quasar/wrappers");
 
-// Configuration dotenv for firebase configuration
-const Dotenv = require("dotenv");
-const path = require("path");
-
-// Charger les variables d'environnement depuis le fichier .env
-require("dotenv").config({ path: path.join(__dirname, ".env") });
-
 module.exports = configure(function (/* ctx */) {
   return {
     eslint: {
@@ -87,19 +80,6 @@ module.exports = configure(function (/* ctx */) {
       // vitePlugins: [
       //   [ 'package-name', { ..options.. } ]
       // ]
-      env: {
-        // Variables d'environnement
-        FIREBASE_API_KEY: JSON.stringify(process.env.FIREBASE_API_KEY),
-        FIREBASE_AUTH_DOMAIN: JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
-        FIREBASE_PROJECT_ID: JSON.stringify(process.env.FIREBASE_PROJECT_ID),
-        FIREBASE_STORAGE_BUCKET: JSON.stringify(
-          process.env.FIREBASE_STORAGE_BUCKET
-        ),
-        FIREBASE_MESSAGING_SENDER_ID: JSON.stringify(
-          process.env.FIREBASE_MESSAGING_SENDER_ID
-        ),
-        FIREBASE_APP_ID: JSON.stringify(process.env.FIREBASE_APP_ID),
-      },
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer

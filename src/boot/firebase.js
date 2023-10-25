@@ -1,8 +1,26 @@
-import { boot } from "quasar";
 import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "src/firebaseConfig"; // Importez la configuration Firebase
+import { firebaseConfig } from "./firbaseConfig"; // Importez la configuration Firebase
+/*
 
-export default boot(async ({ app, store, router, Vue }) => {
+Le fichier firebaseConfig.js doit contenir les informations suivantes.
+Elles sont disponibles dans la console firebase, sous "paramètres du projet"
+
+export const firebaseConfig = {
+  apiKey: "...",
+
+  authDomain: "...",
+
+  projectId: "...",
+
+  storageBucket: "...",
+
+  messagingSenderId: "...",
+
+  appId: "...",
+};
+*/
+
+export default ({ app, router, store }) => {
   // Initialisez Firebase
   initializeApp(firebaseConfig);
 
@@ -11,4 +29,4 @@ export default boot(async ({ app, store, router, Vue }) => {
   // Exemple : Ajouter Firebase à l'instance Vue pour y accéder depuis les composants
   // Vue.prototype.$firebase = Firebase;
   // Remplacez Firebase par les objets Firebase spécifiques dont vous avez besoin
-});
+};
