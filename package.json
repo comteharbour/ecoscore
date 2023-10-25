@@ -15,7 +15,6 @@
   "dependencies": {
     "@quasar/extras": "^1.16.4",
     "firebase": "^10.5.0",
-    "firebaseui": "^6.1.0",
     "quasar": "^2.6.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0"
