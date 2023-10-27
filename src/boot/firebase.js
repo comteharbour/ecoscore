@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 // import { getAuth } from "firebase/auth";
-import { firebaseConfig } from "./firbaseConfig"; // Importez la configuration Firebase
+import { firebaseConfig } from "./firebaseConfig"; // Importez la configuration Firebase
 /*
 
 Le fichier firebaseConfig.js doit contenir les informations suivantes.
