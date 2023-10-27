@@ -17,7 +17,7 @@ async function createUser(email, password) {
     .catch((err) => console.log(err));
 }
 
-export async function signin(email, password) {
+export async function login(email, password) {
   return signInWithEmailAndPassword(auth, email, password);
 }
 

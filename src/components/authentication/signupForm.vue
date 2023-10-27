@@ -14,10 +14,10 @@
 
 <script>
 import { defineComponent } from "vue";
-import { login, createErrorMessage } from "./authentication";
+import { signin, createErrorMessage } from "./authentication";
 
 export default defineComponent({
-  name: "LoginForm",
+  name: "SignupForm",
 
   data() {
     return {
@@ -47,11 +47,11 @@ export default defineComponent({
       this.errorMessage = "";
       this.awaitingForData = true;
       try {
-        const response = await login(this.email, this.password);
+        const response = await signin(this.email, this.password);
+        console.log(response);
         this.awaitingForData = false;
-
-        // TODO: store authentication token
       } catch (error) {
+        console.log(error.code);
         this.errorMessage = createErrorMessage(error);
         this.awaitingForData = false;
       }
