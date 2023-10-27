@@ -1,14 +1,15 @@
 <template>
   <div class="column">
-    <div style="height: 20px">{{ errorMessage }}</div>
-    <q-input type="email" v-model="email" />
-    <q-input type="password" v-model="password" />
+    <div style="height: 20px; color: red">{{ errorMessage }}</div>
+    <q-input type="email" v-model="email" label="e-mail" />
+    <q-input type="password" v-model="password" label="mot de passe" />
+    <div style="height: 20px" />
     <q-btn
       @click="submit"
       :loading="awaitingForData"
       :disable="isButtonDisabled"
-      >Se connecter</q-btn
-    >
+      label="Se connecter"
+    />
   </div>
 </template>
 

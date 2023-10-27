@@ -1,20 +1,26 @@
 <template>
   <div class="column">
-    <div style="height: 20px">{{ errorMessage }}</div>
-    <q-input type="email" v-model="email" />
-    <q-input type="password" v-model="password" />
+    <div style="height: 20px; color: red">{{ errorMessage }}</div>
+    <q-input type="email" v-model="email" label="e-mail" />
+    <q-input type="password" v-model="password" label="mot de passe" />
+    <q-input
+      type="password"
+      v-model="checkPassword"
+      label="répétez votre mot de passe"
+    />
+    <div style="height: 20px" />
     <q-btn
       @click="submit"
       :loading="awaitingForData"
       :disable="isButtonDisabled"
-      >Se connecter</q-btn
-    >
+      label="Créer un compte"
+    />
   </div>
 </template>
 
 <script>
 import { defineComponent } from "vue";
-import { signin, createErrorMessage } from "./authentication";
+import { signup, createErrorMessage } from "./authentication";
 
 export default defineComponent({
   name: "SignupForm",
@@ -23,6 +29,7 @@ export default defineComponent({
     return {
       email: "",
       password: "",
+      checkPassword: "",
       awaitingForData: false,
       errorMessage: "",
     };
@@ -33,7 +40,7 @@ export default defineComponent({
       return this.email != "";
     },
     isPasswordValid() {
-      return this.password != "";
+      return this.password != "" && this.password == this.checkPassword;
     },
     isButtonDisabled() {
       return (
@@ -47,11 +54,10 @@ export default defineComponent({
       this.errorMessage = "";
       this.awaitingForData = true;
       try {
-        const response = await signin(this.email, this.password);
-        console.log(response);
+        const response = await signup(this.email, this.password);
         this.awaitingForData = false;
+        // TODO: store authentication token
       } catch (error) {
-        console.log(error.code);
         this.errorMessage = createErrorMessage(error);
         this.awaitingForData = false;
       }

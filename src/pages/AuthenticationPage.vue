@@ -10,7 +10,7 @@
         flat
       />
       <LoginForm v-if="login" />
-      <div v-else>signup</div>
+      <SignupForm v-else />
     </div>
   </q-page>
 </template>
@@ -18,6 +18,7 @@
 <script>
 import { defineComponent } from "vue";
 import LoginForm from "components/authentication/loginForm.vue";
+import SignupForm from "components/authentication/signupForm.vue";
 
 const MODE = { LOGIN: true, SINGUP: false };
 
@@ -26,6 +27,7 @@ export default defineComponent({
 
   components: {
     LoginForm,
+    SignupForm,
   },
 
   data() {
@@ -58,7 +60,7 @@ export default defineComponent({
         case MODE.SINGUP:
           return "Créer un nouveau compte";
         default:
-          return "erreur d'mode";
+          return "erreur";
       }
     },
   },

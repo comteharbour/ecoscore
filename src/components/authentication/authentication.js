@@ -11,10 +11,8 @@ import {
 
 const auth = getAuth();
 
-async function createUser(email, password) {
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+export async function signup(email, password) {
+  return createUserWithEmailAndPassword(auth, email, password);
 }
 
 export async function login(email, password) {
@@ -31,6 +29,12 @@ export function createErrorMessage(error) {
       return "l'utilisateur n'existe pas";
     case "auth/wrong-password":
       return "le mot de passe est erroné";
+    case "auth/email-already-in-use":
+      return "l'utilisateur existe déjà";
+    case "auth/operation-not-allowed":
+      return "ce mode d'authentification n'est pas activé. COntectez l'administrateur.";
+    case "auth/weak-password":
+      return "le mot de passe choisi est trop faible";
     default:
       return `erreur inconnue : ${error.code}`;
   }
