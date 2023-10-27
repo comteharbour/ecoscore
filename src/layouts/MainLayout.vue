@@ -48,7 +48,7 @@ const linksList = [
     title: "Se connecter",
     caption: "créer ou utiliser un compte",
     icon: "account_circle",
-    route: "/login",
+    route: "/auth",
   },
 ];
 
