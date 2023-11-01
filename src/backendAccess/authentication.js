@@ -18,7 +18,7 @@ const auth = getAuth();
 // TODO: évaluer s'il faut externaliser la gestion des cookies
 
 const cookieName = "authCookie";
-const expirationDays = undefined; // Nombre de jours avant l'expiration du cookie (undefined si pas d'expiration)
+const expirationDays = 36525; // Nombre de jours avant l'expiration du cookie (undefined si pas d'expiration)
 
 function getCookie(name) {
   const cookieString = decodeURIComponent(document.cookie);
@@ -38,18 +38,16 @@ const updateCookie = (token) => {
   const cookieValue = token;
 
   const cookieOptions = {
-    expires: expirationDays
-      ? new Date(new Date().getTime() + expirationDays * 24 * 60 * 60 * 1000)
-      : undefined,
+    expires: new Date(
+      new Date().getTime() + expirationDays * 24 * 60 * 60 * 1000
+    ).toUTCString(),
     sameSite: "strict", // Limite la transmission du cookie aux requêtes du même site (le choix peut être 'strict', 'lax', ou 'none')
     secure: true, // Le cookie est envoyé uniquement sur des connexions HTTPS
     path: "/", // Chemin du site où le cookie est accessible
   };
 
   // Création du cookie en utilisant les options
-  document.cookie = `${cookieName}=${cookieValue}; expires=${cookieOptions.expires.toUTCString()}; path=${
-    cookieOptions.path
-  }; Secure=${cookieOptions.secure}; SameSite=${cookieOptions.sameSite}`;
+  document.cookie = `${cookieName}=${cookieValue}; expires=${cookieOptions.expires}; path=${cookieOptions.path}; Secure=${cookieOptions.secure}; SameSite=${cookieOptions.sameSite}`;
 };
 
 const deleteAuthCookie = () => {

@@ -50,6 +50,7 @@ export default defineComponent({
       try {
         const response = await login(this.email, this.password);
         this.awaitingForData = false;
+        this.$router.push("/");
       } catch (error) {
         this.errorMessage = createErrorMessage(error);
         this.awaitingForData = false;

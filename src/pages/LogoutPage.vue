@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
     <q-spinner v-if="!loggedOut" />
-    <div v-else>Déconnecté</div>
+    <div v-else>Vous avez été déconnecté</div>
   </q-page>
 </template>
 
@@ -21,6 +21,7 @@ export default defineComponent({
     try {
       await logout();
       this.loggedOut = true;
+      setTimeout(() => this.$router.push("/"), 5000);
     } catch {
       console.log(error);
     }
