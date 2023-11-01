@@ -58,7 +58,7 @@ const storeIdToken = async (userCredential) => {
   updateCookie(token);
 };
 
-const logout = async () => {
+export const logout = async () => {
   try {
     await signOut(auth);
     deleteAuthCookie();
@@ -68,7 +68,7 @@ const logout = async () => {
   }
 };
 
-const login = async (email, password) => {
+export const login = async (email, password) => {
   try {
     const userCredential = await signInWithEmailAndPassword(
       getAuth(),
@@ -82,7 +82,7 @@ const login = async (email, password) => {
   }
 };
 
-const automaticLoginIfPossible = async () => {
+export const automaticLoginIfPossible = async () => {
   const token = getCookie(cookieName);
   if (token) {
     try {
@@ -95,7 +95,7 @@ const automaticLoginIfPossible = async () => {
   }
 };
 
-const signup = async (email, password) => {
+export const signup = async (email, password) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(
       getAuth(),
@@ -109,7 +109,7 @@ const signup = async (email, password) => {
   }
 };
 
-const createErrorMessage = (error) => {
+export const createErrorMessage = (error) => {
   switch (error.code) {
     case "auth/invalid-email":
       return "l'e-mail est invalide";
@@ -128,12 +128,4 @@ const createErrorMessage = (error) => {
     default:
       return `erreur inconnue : ${error.code}`;
   }
-};
-
-export default {
-  logout,
-  login,
-  signup,
-  automaticLoginIfPossible,
-  createErrorMessage,
 };
