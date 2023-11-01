@@ -23,6 +23,7 @@
           v-for="link in burgerMenuLinks"
           :key="link.title"
           v-bind="link"
+          v-show="link.hide != authState"
         />
       </q-list>
     </q-drawer>
@@ -35,6 +36,7 @@
 
 <script>
 import { defineComponent, ref } from "vue";
+import { watchAuthState, AUTH_STATE } from "src/backendAccess/authentication";
 import BurgerMenuLink from "components/BurgerMenuLink.vue";
 
 const linksList = [
@@ -49,6 +51,13 @@ const linksList = [
     caption: "créer ou utiliser un compte",
     icon: "account_circle",
     route: "/auth",
+    hide: AUTH_STATE.LOGGED,
+  },
+  {
+    title: "Se déconnecter",
+    icon: "logout",
+    route: "/logout",
+    hide: AUTH_STATE.LOGGED_OUT,
   },
 ];
 
@@ -62,12 +71,18 @@ export default defineComponent({
   setup() {
     const leftDrawerOpen = ref(false);
 
+    const authState = ref(false);
+    watchAuthState((user) => {
+      authState.value = user ? AUTH_STATE.LOGGED : AUTH_STATE.LOGGED_OUT;
+    });
+
     return {
       burgerMenuLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
+      authState,
     };
   },
 });

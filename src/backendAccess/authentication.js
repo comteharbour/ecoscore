@@ -1,6 +1,9 @@
+import "./backendLazyInit";
+
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  onAuthStateChanged,
   signInWithCustomToken,
   signInWithEmailAndPassword,
   signOut,
@@ -129,3 +132,9 @@ export const createErrorMessage = (error) => {
       return `erreur inconnue : ${error.code}`;
   }
 };
+
+export const watchAuthState = (callback) => {
+  return onAuthStateChanged(auth, callback);
+};
+
+export const AUTH_STATE = { LOGGED: "LOGGED", LOGGED_OUT: "LOGGED_OUT" };

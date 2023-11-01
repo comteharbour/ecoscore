@@ -1,3 +1,10 @@
+import { watchAuthState, AUTH_STATE } from "src/backendAccess/authentication";
+
+let authState = AUTH_STATE.LOGGED_OUT;
+watchAuthState((user) => {
+  authState = user ? AUTH_STATE.LOGGED : AUTH_STATE.LOGGED_OUT;
+});
+
 const routes = [
   {
     path: "/",
@@ -7,6 +14,12 @@ const routes = [
       {
         path: "auth",
         component: () => import("pages/AuthenticationPage.vue"),
+        beforeEnter: (to, from) => authState == AUTH_STATE.LOGGED_OUT,
+      },
+      {
+        path: "logout",
+        component: () => import("pages/LogoutPage.vue"),
+        beforeEnter: (to, from) => authState == AUTH_STATE.LOGGED,
       },
     ],
   },

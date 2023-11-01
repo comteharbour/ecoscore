@@ -19,8 +19,6 @@ export const firebaseConfig = {
 };
 */
 
-export default () => {
-  if (getApps().length < 1) {
-    initializeApp(firebaseConfig);
-  }
-};
+if (getApps().length < 1) {
+  initializeApp(firebaseConfig);
+}
