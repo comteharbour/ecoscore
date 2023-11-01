@@ -15,7 +15,7 @@
 
 <script>
 import { defineComponent } from "vue";
-import { login, createErrorMessage } from "./authentication";
+import { login, createErrorMessage } from "src/backendAccess/authentication";
 
 export default defineComponent({
   name: "LoginForm",
@@ -50,8 +50,6 @@ export default defineComponent({
       try {
         const response = await login(this.email, this.password);
         this.awaitingForData = false;
-
-        // TODO: store authentication token
       } catch (error) {
         this.errorMessage = createErrorMessage(error);
         this.awaitingForData = false;
